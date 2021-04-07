@@ -10,6 +10,8 @@ now = datetime.now()
 current_time = now.strftime("%H:%M:%S")
 
 blink = False
+updateScreen = False
+
 pet = "(o w o)"
 petBlink = "(- w -)"
 
@@ -21,15 +23,19 @@ while running:
     current_time = now.strftime("%H:%M:%S")
     if current_time != timeLastTick:
         blink = not blink
-        print("Current Time =", current_time)
+        updateScreen = True
+        cls()
     if keyboard.is_pressed('shift'):
         print("Current Time =", current_time)
         userInput = input()
-    cls()
-
+    
 
     if blink:
-        print(petBlink)
+        if updateScreen:
+            updateScreen = False
+            print(petBlink + "\n" + current_time)
     else:
-        print(pet)
+        if updateScreen:
+            updateScreen = False
+            print(pet + "\n" + current_time)
 
