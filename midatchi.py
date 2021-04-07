@@ -5,17 +5,23 @@ import os
 def cls():
     os.system('cls' if os.name=='nt' else 'clear')
 
-running = True
+
 now = datetime.now()
 current_time = now.strftime("%H:%M:%S")
 
+running = True
 blink = False
 updateScreen = False
+titleScreen = True
 
 pet = "(o w o)"
 petBlink = "(- w -)"
 
-print("Welcome to midatchi!")
+print("WELCOME TO MIDATCHI!\n~~~~~~~~~~~~~~~~~~~\npress ENTER to play")
+while titleScreen:
+    if keyboard.is_pressed('enter'):
+        titleScreen = False
+
 
 while running:
     now = datetime.now()
