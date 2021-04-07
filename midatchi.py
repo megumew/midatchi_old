@@ -57,6 +57,10 @@ while running:
         cls()
         print(petName)
 
+    if keyboard.is_pressed('escape'):
+        exit()
+
+
 
     if updateScreen:
         if blink:
