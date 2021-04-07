@@ -1,5 +1,9 @@
 from datetime import datetime
 import keyboard
+import os
+
+def cls():
+    os.system('cls' if os.name=='nt' else 'clear')
 
 running = True
 now = datetime.now()
@@ -12,16 +16,20 @@ petBlink = "(- w -)"
 print("Welcome to midatchi!")
 
 while running:
-    if keyboard.is_pressed('shift'):
-        userInput = input()
     now = datetime.now()
     timeLastTick = current_time
     current_time = now.strftime("%H:%M:%S")
     if current_time != timeLastTick:
         blink = not blink
         print("Current Time =", current_time)
-        if blink:
-            print(petBlink)
-        else:
-            print(pet)
+    if keyboard.is_pressed('shift'):
+        print("Current Time =", current_time)
+        userInput = input()
+    cls()
+
+
+    if blink:
+        print(petBlink)
+    else:
+        print(pet)
 
