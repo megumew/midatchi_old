@@ -2,8 +2,9 @@ from datetime import datetime
 import keyboard
 import os
 
+
 def cls():
-    os.system('cls' if os.name=='nt' else 'clear')
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 
 now = datetime.now()
@@ -17,6 +18,10 @@ updateScreen = False
 petNameScreen = True
 nameNotConfirm = True
 
+statusHunger = "~"
+statusFun = "c:"
+status3 = "?"
+
 petName = ""
 petEyes = "(o w o)"
 petBlink = "(- w -)"
@@ -24,10 +29,20 @@ pet = petEyes
 
 
 def render():
-    print(pet +"\n" + current_time)
+    print(petName + ":\t" + statusHunger + " " + statusFun + " " + status3 + "\n\n\t" + pet + "\n\t" + current_time)
 
+def petState():
+    global pet
+    global blink
+    if(blink):
+        pet = petBlink
+    else:
+        pet = petEyes
 
-
+def tick():
+    global blink
+    blink = not blink
+    petState()
 
 titleScreen = True
 print("WELCOME TO MIDATCHI!\n~~~~~~~~~~~~~~~~~~~\npress ENTER to play")
@@ -43,15 +58,15 @@ while petNameScreen:
     petName = input()
     if petName != "":
         while nameNotConfirm:
-            print("Are you sure you want your pet to be named " + petName + "? ('yes'/'no')")
+            print("Are you sure you want your pet to be named " +
+                  petName + "? ('yes'/'no')")
             yesNo = str.lower(input())
-            if yesNo == "yes" :
+            if yesNo == "yes":
                 petNameScreen = False
                 nameNotConfirm = False
                 break
             elif yesNo == "no":
                 nameNotConfirm = False
-                
 
 
 while running:
@@ -60,14 +75,13 @@ while running:
     current_time = now.strftime("%H:%M:%S")
 
     if current_time != timeLastTick:
-        blink = not blink
+        tick()
         cls()
-        render()    
+        render()
 
     if keyboard.is_pressed('shift'):
         cls()
         print(petName)
-
 
     if keyboard.is_pressed('escape'):
         exit()
