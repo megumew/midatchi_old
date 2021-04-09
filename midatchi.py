@@ -11,19 +11,31 @@ current_time = now.strftime("%H:%M:%S")
 
 running = True
 blink = False
+
 updateScreen = False
-titleScreen = True
+
 petNameScreen = True
 nameNotConfirm = True
-petName = ""
-pet = "(o w o)"
-petBlink = "(- w -)"
 
+petName = ""
+petEyes = "(o w o)"
+petBlink = "(- w -)"
+pet = petEyes
+
+
+def render():
+    print(pet +"\n" + current_time)
+
+
+
+
+titleScreen = True
 print("WELCOME TO MIDATCHI!\n~~~~~~~~~~~~~~~~~~~\npress ENTER to play")
 while titleScreen:
     if keyboard.is_pressed('enter'):
-        input.__format__
         titleScreen = False
+
+input.__format__
 
 print("Please enter your pets name:")
 while petNameScreen:
@@ -43,30 +55,19 @@ while petNameScreen:
 
 
 while running:
-
     now = datetime.now()
     timeLastTick = current_time
     current_time = now.strftime("%H:%M:%S")
 
     if current_time != timeLastTick:
         blink = not blink
-        updateScreen = True
         cls()
+        render()    
 
     if keyboard.is_pressed('shift'):
         cls()
         print(petName)
 
+
     if keyboard.is_pressed('escape'):
         exit()
-
-
-
-    if updateScreen:
-        if blink:
-            updateScreen = False
-            print(petBlink + "\n" + current_time)
-        else:
-            updateScreen = False
-            print(pet + "\n" + current_time)
-
